@@ -1,0 +1,8 @@
+applications:
+- path: target/JavaRESTAPI.war
+  memory: 256M
+  instances: 1
+  name: CG-CloudCenter-Demo
+  disk_quota: 1024M
+  services:
+  - ClearDBMySQL-AssetCenter

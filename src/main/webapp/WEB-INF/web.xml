@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	version="3.0">
+
+  <display-name>Java REST Sample</display-name>
+  <servlet>
+    <servlet-name>javax.ws.rs.core.Application</servlet-name>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>javax.ws.rs.core.Application</servlet-name>
+    <url-pattern>/api/*</url-pattern>
+  </servlet-mapping>
+  
+  <!-- Login Servlet -->  
+  <servlet>
+    <servlet-name>loginServlet</servlet-name>
+    <servlet-class>com.ibm.controller.LoginServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>loginServlet</servlet-name>
+    <url-pattern>/loginServlet</url-pattern>
+  </servlet-mapping>
+  
+  <filter>  
+	<filter-name>f1</filter-name>  
+	<filter-class>com.ibm.filter.AccessFilter</filter-class>  
+  </filter>  
+   
+	<filter-mapping>  
+	<filter-name>f1</filter-name>  
+	<url-pattern>/admin.jsp</url-pattern>  
+	</filter-mapping>  
+
+  <welcome-file-list>
+    <welcome-file>login.jsp</welcome-file>
+  </welcome-file-list>
+
+</web-app>

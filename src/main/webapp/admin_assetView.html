@@ -1,0 +1,267 @@
+<div class="top-head-h3">
+	<div class="pull-left">
+		<button id="adminHomeBtn" class="btn btn-primary headerBtnLeft pull-left">Home</button>
+	</div>
+	<div class="pull-center">
+		<h3 style="text-align:center;padding-top:12px;color:#152935;">{{categoryName}}</h3>
+	</div>
+	<!-- <div class="pull-right">
+		<button id="loginOutBtn" class="btn btn-primary headerBtn pull-right" style="margin-top:-26px;">Logout</button>
+	</div> -->
+	<div class="pull-right">
+		<button id="deleteAssetBtn" ng-click="showDeleteAssetForm()" class="btn btn-primary headerBtn pull-right" style="margin-top:-26px;">Delete Asset</button>
+	</div>
+	<div class="pull-right">
+		<button id="updateAssetBtn" ng-click="showUpdateAssetForm()" class="btn btn-primary headerBtn pull-right" style="margin-top:-26px;">Update Asset</button>
+	</div>
+	<div class="pull-right">
+		<button id="createAssetBtn" ng-click="showCreateAssetForm()" class="btn btn-primary headerBtn pull-right" style="margin-top:-26px;">Add Asset</button>
+	</div>
+</div>
+<div class="body">
+	<div id="assetcontainer" style="height: 600px;" ng-show="showCreateAsset">
+		<form class="form-horizontal">
+			<h2>Enter  Asset Details</h2>
+			<div class="form-group">
+			  <label class="control-label col-sm-2" for="assetName">Asset Name</label>
+			  <div class="col-sm-7">
+				<input type="text" class="form-control" id="assetName" name="assetName" placeholder="Enter Asset Name" ng-model="asset.name">
+			  </div>
+			</div>
+			<div class="form-group">
+			  <label class="control-label col-sm-2" for="categoryList">Categories</label>
+			  <div class="col-sm-7">
+				<!-- <select multiple class="selectpicker form-control"  id="categoryList" ng-model="asset.category">
+				  <option ng-repeat="cat in categoryList" value="{{cat.category_name}}">{{cat.category_name}}</option>
+				</select> -->
+				<select multiple class="form-control" id="sel2" ng-model="asset.category">
+					<option ng-repeat="cat in categoryList" value="{{cat.category_name}}">{{cat.category_name}}</option>				
+				</select>
+			  </div>
+			</div>
+			<div class="form-group">
+			  <label class="control-label col-sm-2" for="shortAssetDesc">Asset Short Description</label>
+			  <div class="col-sm-7">
+				<input type="text" class="form-control" id="shortAssetDesc" name="shortAssetDesc" placeholder="Enter Short Description for Asset" ng-model="asset.short_description">
+			  </div>
+			</div>
+			<div class="form-group">
+			  <label class="control-label col-sm-2" for="longAssetDesc">Asset Detail Description</label>
+			  <div class="col-sm-7">
+				<input type="textarea" class="form-control" id="longAssetDesc" name="longAssetDesc" placeholder="Enter Detail Description for Asset" ng-model="asset.long_description">
+			  </div>
+			</div>
+			<div class="form-group">
+			  <label class="control-label col-sm-2" for="assetOwner">Asset Owner</label>
+			  <div class="col-sm-7">
+				<input type="text" class="form-control" id="assetOwner" name="assetOwner" placeholder="Enter Asset Owner" ng-model="asset.owner">
+			  </div>
+			</div>
+			<div class="form-group">
+			  <label class="control-label col-sm-2" for="business_unit">Asset Business Unit</label>
+			  <div class="col-sm-7">
+				<input type="text" class="form-control" id="business_unit" name="business_unit" placeholder="Enter Business Unit" ng-model="asset.business_unit">
+			  </div>
+			</div>
+			<div class="form-group">
+			  <label class="control-label col-sm-2" for="imageUrl">Asset Image URL</label>
+			  <div class="col-sm-7">
+				<input type="text" class="form-control" id="imageUrl" name="imageUrl" placeholder="Enter Image URL for Asset" ng-model="asset.image_url">
+			  </div>
+			</div>
+			<div class="form-group">
+			  <label class="control-label col-sm-2" for="docUrl">Asset Document URL</label>
+			  <div class="col-sm-7">
+				<input type="text" class="form-control" id="docUrl" name="docUrl" placeholder="Enter Image URL for Asset" ng-model="asset.document_url">
+			  </div>
+			</div>
+			<div class="form-group">
+			  <label class="control-label col-sm-2" for="demoUrl">Asset Demo URL</label>
+			  <div class="col-sm-7">
+				<input type="text" class="form-control" id="demoUrl" name="demoUrl" placeholder="Enter Demo URL for Asset" ng-model="asset.demo_url">
+			  </div>
+			</div>
+			<div class="form-group">        
+			  <div class="col-sm-offset-3 col-sm-7">
+				<button type="submit" class="btn btn-default" ng-click="asset.createAsset()">Create Asset</button>
+				<button ng-click="hideCreateAssetForm()" class="btn btn-default">Cancel</button>
+			  </div>
+			</div>
+		</form>
+	</div>
+	
+	<div id="assetcontainer" style="height: 600px;" ng-show="showUpdateAsset">
+		<form class="form-horizontal">
+			<h2>Enter  Asset Details</h2>
+			<div class="form-group">
+			  <label class="control-label col-sm-2" for="assetName">Asset Name</label>
+			  <div class="col-sm-7">
+				<select class="form-control" id="selasset" ng-model="asset.asset_title" ng-change="asset.updateView()">
+					<option ng-repeat="u_asset in assetList">{{u_asset.asset_title}}</option>
+				</select>
+			  </div>
+			</div>
+			<div class="form-group">
+			  <label class="control-label col-sm-2" for="categoryList">Categories</label>
+			  <div class="col-sm-7">
+				<!-- <select multiple class="selectpicker form-control"  id="categoryList" ng-model="asset.category">
+				  <option ng-repeat="cat in categoryList" value="{{cat.category_name}}">{{cat.category_name}}</option>
+				</select> -->
+				<select multiple class="form-control" id="sel2" ng-model="asset.category">
+					<option ng-repeat="cat in categoryList" value="{{cat.category_name}}">{{cat.category_name}}</option>				
+				</select>
+			  </div>
+			</div>
+			<div class="form-group">
+			  <label class="control-label col-sm-2" for="shortAssetDesc">Asset Short Description</label>
+			  <div class="col-sm-7">
+				<input type="text" class="form-control" id="shortAssetDesc" name="shortAssetDesc" placeholder="Enter Short Description for Asset" ng-model="asset.short_description">
+			  </div>
+			</div>
+			<div class="form-group">
+			  <label class="control-label col-sm-2" for="longAssetDesc">Asset Detail Description</label>
+			  <div class="col-sm-7">
+				<input type="textarea" class="form-control" id="longAssetDesc" name="longAssetDesc" placeholder="Enter Detail Description for Asset" ng-model="asset.long_description">
+			  </div>
+			</div>
+			<div class="form-group">
+			  <label class="control-label col-sm-2" for="assetOwner">Asset Owner</label>
+			  <div class="col-sm-7">
+				<input type="text" class="form-control" id="assetOwner" name="assetOwner" placeholder="Enter Asset Owner" ng-model="asset.owner">
+			  </div>
+			</div>
+			<div class="form-group">
+			  <label class="control-label col-sm-2" for="business_unit">Asset Business Unit</label>
+			  <div class="col-sm-7">
+				<input type="text" class="form-control" id="business_unit" name="business_unit" placeholder="Enter Business Unit" ng-model="asset.business_unit">
+			  </div>
+			</div>
+			<div class="form-group">
+			  <label class="control-label col-sm-2" for="imageUrl">Asset Image URL</label>
+			  <div class="col-sm-7">
+				<input type="text" class="form-control" id="imageUrl" name="imageUrl" placeholder="Enter Image URL for Asset" ng-model="asset.image_url">
+			  </div>
+			</div>
+			<div class="form-group">
+			  <label class="control-label col-sm-2" for="docUrl">Asset Document URL</label>
+			  <div class="col-sm-7">
+				<input type="text" class="form-control" id="docUrl" name="docUrl" placeholder="Enter Image URL for Asset" ng-model="asset.document_url">
+			  </div>
+			</div>
+			<div class="form-group">
+			  <label class="control-label col-sm-2" for="demoUrl">Asset Demo URL</label>
+			  <div class="col-sm-7">
+				<input type="text" class="form-control" id="demoUrl" name="demoUrl" placeholder="Enter Demo URL for Asset" ng-model="asset.demo_url">
+			  </div>
+			</div>
+			<div class="form-group">        
+			  <div class="col-sm-offset-3 col-sm-7">
+				<button type="submit" class="btn btn-default" ng-click="asset.updateAsset()">Update Asset</button>
+				<button ng-click="hideUpdateAssetForm()" class="btn btn-default">Cancel</button>
+			  </div>
+			</div>
+		</form>
+	</div>
+	
+	<div id="assetcontainer" style="height: 600px;" ng-show="showDeleteAsset">
+		<form class="form-horizontal">
+			<h2>Select Asset</h2>
+			
+			<div class="form-group">
+			  <div class="col-sm-offset-3 col-sm-7" ng-repeat="u_asset in assetList">
+				<div class="radio" style="text-align:left;">
+				  <label><input type="radio" name="selectedAsset"  ng-model="$parent.selectedAsset" value="{{u_asset.asset_title}}">{{u_asset.asset_title}}</label>
+				</div>
+			  </div>
+			</div>
+			
+			<div class="form-group">        
+			  <div class="col-sm-offset-3 col-sm-7">
+				<button type="submit" class="btn btn-default" ng-click="asset.deleteAsset()">Delete Asset</button>
+				<button ng-click="hideDeleteAssetForm()" class="btn btn-default">Cancel</button>
+			  </div>
+			</div>
+		</form>
+	</div>
+	
+	
+	<div class="container12" ng-repeat="asset in assetList">
+		<div class="column10 prefix1">
+			<h3>{{asset.asset_title}}</h3>
+			<p></p>
+			<div class="screen-shots ng-scope" style="width: 100%;">
+				<img src={{asset.image_url}}> 
+			</div>
+			<section id="works-methods-" class="section section-3" lang="en">
+				<p></p>
+				<div class="works-and-methods-wrapper">
+					<div class="column4 alpha omega relative vmid txtcenter td border-blue-right float-none overflow-hidden wm-title-wrapper">
+						<div class="wm-title" style="transform: translate(0px, 0px);"><h5>Overview</h5></div>
+					</div>
+					<div class="column6 relative table vmid td padding-left-30 overflow-hidden special-column">
+						<div class="wm-content" style="transform: translate(0px, 0px);">
+						<p>{{asset.short_description}}</p>
+						</div>
+					</div>
+				</div>
+				<div class="works-and-methods-wrapper">
+					<div
+						class="column4 alpha omega relative vmid txtcenter td border-blue-right float-none overflow-hidden wm-title-wrapper">
+						<div class="wm-title" style="transform: translate(0px, 0px);">
+							<h5>Description</h5>
+						</div>
+					</div>
+					<div
+						class="column6 relative table vmid td padding-left-30 overflow-hidden special-column">
+						<div class="wm-content" style="transform: translate(0px, 0px);">
+							<p ng-bind-html="asset.long_description"></p>
+						</div>
+					</div>
+				</div>
+				<div class="works-and-methods-wrapper">
+					<div
+						class="column4 alpha omega relative vmid txtcenter td border-blue-right float-none overflow-hidden wm-title-wrapper">
+						<div class="wm-title" style="transform: translate(0px, 0px);">
+							<h5>Owner</h5>
+						</div>
+					</div>
+					<div
+						class="column6 relative table vmid td padding-left-30 overflow-hidden special-column">
+						<div class="wm-content" style="transform: translate(0px, 0px);">
+							
+							<p>{{asset.owner}}</p>
+						</div>
+					</div>
+				</div>
+				<div class="works-and-methods-wrapper">
+					<div
+						class="column4 alpha omega relative vmid txtcenter td border-blue-right float-none overflow-hidden wm-title-wrapper">
+						<div class="wm-title" style="transform: translate(0px, 0px);">
+							<h5>Business Unit</h5>
+						</div>
+					</div>
+					<div
+						class="column6 relative table vmid td padding-left-30 overflow-hidden special-column">
+						<div class="wm-content" style="transform: translate(0px, 0px);">
+							
+							<p>{{asset.business_unit}}</p>
+						</div>
+					</div>
+				</div>
+				<div class="details-btmLinks">
+					<a href={{asset.document_url}} target="_blank" class="ng-scope" style="position:left;">DOCUMENT</a>&nbsp;
+					<a href={{asset.demo_url}} target="_blank" class="ng-scope" style="position:right;">APPLICATION</a>
+				</div>
+			</section>
+	
+		</div>
+	</div>
+</div>
+
+<script>
+
+$(document).ready(function(e) {
+  $('.selectpicker').selectpicker('refresh');
+});
+
+</script>
